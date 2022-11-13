@@ -1,0 +1,31 @@
+#product : laptop
+
+from bs4 import BeautifulSoup 
+
+import requests 
+
+import csv
+
+import pandas as pd
+
+products=[]
+
+
+ratings=[]
+
+
+for a in soup.findAll('a',href=True, attrs={'class':'_1fQZEK'}):
+
+  name=a.find('div',attrs={'class':'_4rR01T'})
+
+  rating=a.find('div',attrs={'class':'_3LWZlK'})
+
+  products.append(name.text)
+
+  ratings.append(rating.text)
+
+df = pd.DataFrame({'Product Name':products,'Ratings':ratings})
+
+df.head()
+
+df.to_csv('products.csv')
